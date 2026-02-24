@@ -84,8 +84,8 @@ export default function SkyFeed({ newBalloonId }: SkyFeedProps = {}) {
   return (
     <div>
       {totalCount > 0 && (
-        <p className="text-center text-amber-800/80 text-sm mb-6 font-medium">
-          {totalCount} {totalCount === 1 ? "wish" : "wishes"} floating in the sky
+        <p className="text-center text-gray-500 text-sm mb-6 font-display">
+          {totalCount} {totalCount === 1 ? "wish" : "wishes"} released to the sky today
         </p>
       )}
       <div className="flex flex-wrap justify-center gap-6 sm:gap-8 px-4">

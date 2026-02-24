@@ -38,7 +38,7 @@ export default function BalloonCard({
       <BalloonSVG styleId={balloon.styleId} shapeId={balloon.shapeId ?? 0} size={80} />
 
       <div
-        className={`mt-1 px-3 py-2 bg-amber-50/90 border border-amber-200/60 rounded-xl max-w-[150px] transition-all duration-200 ${
+        className={`mt-1 px-3 py-2 bg-white border border-gray-200 rounded-xl max-w-[150px] transition-all duration-200 ${
           isBlurred ? "cursor-pointer" : ""
         }`}
         style={{ transform: `rotate(${rotation}deg)` }}
@@ -52,7 +52,7 @@ export default function BalloonCard({
         }
       >
         <p
-          className={`text-[13px] text-gray-600 leading-snug line-clamp-3 ${
+          className={`text-[13px] text-gray-800 leading-snug line-clamp-3 font-display ${
             isBlurred ? "blur-sm select-none" : ""
           }`}
         >

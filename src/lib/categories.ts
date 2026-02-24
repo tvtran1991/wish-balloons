@@ -4,6 +4,7 @@ export const CATEGORIES = [
   { id: "family", label: "Family", icon: "house" },
   { id: "career", label: "Career", icon: "briefcase" },
   { id: "finance", label: "Finance", icon: "building" },
+  { id: "fun", label: "Fun", icon: "sparkles" },
   { id: "misc", label: "Misc", icon: "sparkles" },
 ] as const;
 

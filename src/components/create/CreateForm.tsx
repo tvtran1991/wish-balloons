@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import ColorPicker from "@/components/balloon/ColorPicker";
-import ShapePicker from "@/components/balloon/ShapePicker";
 import CategoryPicker from "@/components/balloon/CategoryPicker";
 import Confirmation from "@/components/share/Confirmation";
 
@@ -20,7 +19,7 @@ type Phase = "form" | "releasing" | "done";
 interface CreateFormProps {
   phase: Phase;
   balloonId: string | null;
-  onRelease: (balloon: { id: string; styleId: number; shapeId: number }) => void;
+  onRelease: (balloon: { id: string; styleId: number }) => void;
   onReset: () => void;
 }
 
@@ -34,7 +33,6 @@ export default function CreateForm({
   const [category, setCategory] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState("");
   const [styleId, setStyleId] = useState<number | null>(1);
-  const [shapeId, setShapeId] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -59,7 +57,6 @@ export default function CreateForm({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           styleId,
-          shapeId,
           wishText: wishText.trim(),
           category: category || undefined,
           displayName: displayName.trim() || undefined,
@@ -75,7 +72,7 @@ export default function CreateForm({
       }
 
       const balloon = await res.json();
-      onRelease({ id: balloon.id, styleId, shapeId });
+      onRelease({ id: balloon.id, styleId });
     } catch {
       setError("Network error. Please check your connection and try again.");
     } finally {
@@ -88,7 +85,6 @@ export default function CreateForm({
     setCategory(null);
     setDisplayName("");
     setStyleId(1);
-    setShapeId(0);
     setError(null);
     onReset();
   }
@@ -173,12 +169,6 @@ export default function CreateForm({
       <ColorPicker
         selectedId={styleId}
         onSelect={(id) => setStyleId(id)}
-      />
-
-      {/* Shape picker */}
-      <ShapePicker
-        selectedId={shapeId}
-        onSelect={(id) => setShapeId(id)}
       />
 
       {/* Error */}

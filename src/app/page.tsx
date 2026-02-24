@@ -13,11 +13,10 @@ export default function HomePage() {
   const [releasedBalloon, setReleasedBalloon] = useState<{
     id: string;
     styleId: number;
-    shapeId: number;
   } | null>(null);
 
   const handleRelease = useCallback(
-    (balloon: { id: string; styleId: number; shapeId: number }) => {
+    (balloon: { id: string; styleId: number }) => {
       setReleasedBalloon(balloon);
       setPhase("releasing");
     },
@@ -69,7 +68,6 @@ export default function HomePage() {
           <div className="absolute inset-0 z-20">
             <ReleaseAnimation
               styleId={releasedBalloon.styleId}
-              shapeId={releasedBalloon.shapeId}
               onComplete={() => setPhase("done")}
             />
           </div>

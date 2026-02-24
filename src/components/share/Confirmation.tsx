@@ -37,13 +37,14 @@ export default function Confirmation({ balloonId, onReleaseAnother }: Confirmati
         >
           View the Sky
         </Link>
-        <Link
-          href={`/b/${balloonId}`}
-          className="px-6 py-2.5 bg-white border border-border hover:border-accent/40 text-text-primary rounded-full transition-all duration-200 text-sm"
-        >
-          View Your Balloon
-        </Link>
       </div>
+
+      <button
+        onClick={() => window.location.reload()}
+        className="text-text-secondary/50 hover:text-text-secondary text-xs transition-colors duration-200 cursor-pointer"
+      >
+        Start Over
+      </button>
     </div>
   );
 }
