@@ -56,7 +56,7 @@ export default async function BalloonPage({ params }: PageProps) {
         <header className="flex items-center justify-between px-4 sm:px-8 py-6">
           <Link
             href="/"
-            className="text-text-primary font-bold text-lg hover:text-accent transition-colors"
+            className="text-text-primary font-bold text-lg hover:text-accent transition-colors font-display"
           >
             Wish Balloons
           </Link>

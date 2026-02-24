@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --sky-top: #c4dff6;
-  --sky-bottom: #eef3f8;
-  --panel-bg: #f0f4f8;
+  --sky-top: #dbeafe;
+  --sky-bottom: #f0f7ff;
+  --panel-bg: #f8fafc;
   --card-bg: #ffffff;
   --accent: #6cb4d8;
   --accent-hover: #5a9fc4;
@@ -25,6 +25,7 @@
   --color-text-muted: var(--text-muted);
   --color-border: var(--border);
   --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-playfair);
 }
 
 body {

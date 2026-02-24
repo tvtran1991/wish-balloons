@@ -13,29 +13,31 @@ export default function SkyPage() {
       <SkyBackground />
 
       <div className="relative z-10">
-        <header className="flex items-center justify-between px-4 sm:px-8 py-6">
+        <header className="flex items-center justify-center px-4 sm:px-8 py-6">
           <Link
             href="/"
-            className="text-text-primary font-bold text-lg hover:text-accent transition-colors"
+            className="text-text-primary font-bold text-lg hover:text-accent transition-colors font-display"
           >
             Wish Balloons
           </Link>
+        </header>
+
+        <div className="text-center mb-6">
+          <h1 className="text-3xl font-bold text-text-primary mb-2 font-display">The Sky</h1>
+          <p className="text-text-secondary mb-5">
+            Wishes floating among the clouds
+          </p>
           <Link
             href="/"
-            className="px-5 py-2 bg-accent hover:bg-accent-hover text-white font-semibold rounded-full transition-all duration-200 text-sm hover:scale-105"
+            className="inline-block px-8 py-3 bg-accent hover:bg-accent-hover text-white font-semibold rounded-full shadow-lg transition-all duration-200 text-base hover:scale-105"
           >
             Create a Balloon
           </Link>
-        </header>
-
-        <div className="text-center mb-10">
-          <h1 className="text-3xl font-bold text-text-primary mb-2">The Sky</h1>
-          <p className="text-text-secondary">
-            Wishes floating among the clouds
-          </p>
         </div>
 
-        <SkyFeed />
+        <div className="pt-4 pb-12">
+          <SkyFeed />
+        </div>
       </div>
     </main>
   );

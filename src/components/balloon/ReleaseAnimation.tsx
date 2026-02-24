@@ -5,6 +5,7 @@ import BalloonSVG from "./BalloonSVG";
 
 interface ReleaseAnimationProps {
   styleId: number;
+  shapeId?: number;
   onComplete: () => void;
 }
 
@@ -20,6 +21,7 @@ const SPARKLE_COLORS = ["#93c5fd", "#f9a8d4", "#c4b5fd", "#86efac", "#fde047"];
 
 export default function ReleaseAnimation({
   styleId,
+  shapeId = 0,
   onComplete,
 }: ReleaseAnimationProps) {
   useEffect(() => {
@@ -39,7 +41,7 @@ export default function ReleaseAnimation({
 
   return (
     <div
-      className="flex flex-col items-center justify-center min-h-[60vh] relative"
+      className="flex flex-col items-center justify-end w-full h-full relative"
       aria-live="polite"
       aria-label="Your balloon is being released into the sky"
     >
@@ -62,7 +64,7 @@ export default function ReleaseAnimation({
 
       {/* Rising balloon */}
       <div className="animate-rise">
-        <BalloonSVG styleId={styleId} size={160} />
+        <BalloonSVG styleId={styleId} shapeId={shapeId} size={160} />
       </div>
     </div>
   );

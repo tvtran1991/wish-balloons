@@ -2,6 +2,7 @@ export interface BalloonData {
   id: string;
   createdAt: string;
   styleId: number;
+  shapeId: number;
   wishText: string;
   category: string | null;
   displayName: string | null;

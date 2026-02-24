@@ -1,9 +1,11 @@
 "use client";
 
 import { getBalloonStyle } from "@/lib/balloon-styles";
+import { getBalloonShape } from "@/lib/balloon-shapes";
 
 interface BalloonSVGProps {
   styleId: number;
+  shapeId?: number;
   size?: number;
   className?: string;
   showString?: boolean;
@@ -11,20 +13,22 @@ interface BalloonSVGProps {
 
 export default function BalloonSVG({
   styleId,
+  shapeId = 0,
   size = 120,
   className = "",
   showString = true,
 }: BalloonSVGProps) {
   const style = getBalloonStyle(styleId);
+  const shape = getBalloonShape(shapeId);
   const { bodyColor, accentColor, glowColor } = style;
   const w = size;
-  const h = size * 1.4;
+  const h = size * 1.6;
 
   return (
     <svg
       width={w}
       height={h}
-      viewBox="0 0 120 168"
+      viewBox="0 0 120 192"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
@@ -85,16 +89,23 @@ export default function BalloonSVG({
       {/* Highlight reflection */}
       <ellipse cx="45" cy="35" rx="12" ry="18" fill="white" opacity="0.12" />
 
+      {/* Zodiac animal silhouette overlay */}
+      {shape && (
+        <g transform="translate(40, 38) scale(1)">
+          <path d={shape.svgPath} fill="white" opacity="0.2" />
+        </g>
+      )}
+
       {/* String */}
       {showString && (
         <g className="animate-sway">
           <path
-            d="M60 118 Q58 135, 62 145 Q64 155, 60 168"
+            d="M60 118 Q56 132, 63 145 Q67 158, 58 172 Q54 180, 60 190"
             stroke={accentColor}
-            strokeWidth="1.2"
+            strokeWidth="1.8"
             fill="none"
             strokeLinecap="round"
-            opacity="0.7"
+            opacity="0.9"
           />
         </g>
       )}

@@ -9,13 +9,16 @@ interface BalloonCardProps {
   balloon: BalloonData;
   animationDelay?: number;
   animationDuration?: number;
+  index?: number;
 }
 
 export default function BalloonCard({
   balloon,
   animationDelay = 0,
   animationDuration = 4,
+  index = 0,
 }: BalloonCardProps) {
+  const rotation = index % 2 === 0 ? 1.5 : -1.5;
   const [revealed, setRevealed] = useState(
     balloon.privacy === "public"
   );
@@ -32,12 +35,13 @@ export default function BalloonCard({
       }}
       aria-label={`Balloon wish${balloon.displayName ? ` by ${balloon.displayName}` : ""}`}
     >
-      <BalloonSVG styleId={balloon.styleId} size={80} />
+      <BalloonSVG styleId={balloon.styleId} shapeId={balloon.shapeId ?? 0} size={80} />
 
       <div
-        className={`mt-1 px-3 py-2 bg-white/90 shadow-sm rounded-lg max-w-[150px] backdrop-blur-sm transition-all duration-200 ${
+        className={`mt-1 px-3 py-2 bg-amber-50/90 border border-amber-200/60 rounded-xl max-w-[150px] transition-all duration-200 ${
           isBlurred ? "cursor-pointer" : ""
         }`}
+        style={{ transform: `rotate(${rotation}deg)` }}
         onClick={
           isBlurred
             ? (e) => {
@@ -48,17 +52,17 @@ export default function BalloonCard({
         }
       >
         <p
-          className={`text-xs text-text-primary leading-snug line-clamp-3 ${
+          className={`text-[13px] text-gray-600 leading-snug line-clamp-3 ${
             isBlurred ? "blur-sm select-none" : ""
           }`}
         >
           {balloon.wishText}
         </p>
         {isBlurred && (
-          <p className="text-[10px] text-text-secondary mt-1">Tap to reveal</p>
+          <p className="text-[11px] text-gray-400 mt-1">Tap to reveal</p>
         )}
         {balloon.displayName && !isBlurred && (
-          <p className="text-[10px] text-text-secondary mt-1">
+          <p className="text-[11px] text-gray-400 mt-1">
             &mdash; {balloon.displayName}
           </p>
         )}

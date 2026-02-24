@@ -6,7 +6,7 @@ export default function BalloonNotFound() {
     <main className="relative min-h-screen flex flex-col items-center justify-center px-4">
       <SkyBackground />
       <div className="relative z-10 text-center space-y-4 animate-fade-in">
-        <h1 className="text-3xl font-bold text-text-primary">
+        <h1 className="text-3xl font-bold text-text-primary font-display">
           Balloon not found
         </h1>
         <p className="text-text-secondary max-w-sm">

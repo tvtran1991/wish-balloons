@@ -42,6 +42,7 @@ export async function POST(request: NextRequest) {
   const balloon = await prisma.balloon.create({
     data: {
       styleId: parsed.data.styleId,
+      shapeId: parsed.data.shapeId,
       wishText: parsed.data.wishText,
       category: parsed.data.category ?? null,
       displayName: parsed.data.displayName ?? null,
@@ -68,17 +69,20 @@ export async function GET(request: NextRequest) {
 
   const { cursor, limit } = parsed.data;
 
-  const balloons = await prisma.balloon.findMany({
-    where: { status: "active" },
-    orderBy: { createdAt: "desc" },
-    take: limit + 1,
-    ...(cursor
-      ? {
-          cursor: { id: cursor },
-          skip: 1,
-        }
-      : {}),
-  });
+  const [balloons, totalCount] = await Promise.all([
+    prisma.balloon.findMany({
+      where: { status: "active" },
+      orderBy: { createdAt: "desc" },
+      take: limit + 1,
+      ...(cursor
+        ? {
+            cursor: { id: cursor },
+            skip: 1,
+          }
+        : {}),
+    }),
+    prisma.balloon.count({ where: { status: "active" } }),
+  ]);
 
   const hasMore = balloons.length > limit;
   const results = hasMore ? balloons.slice(0, limit) : balloons;
@@ -87,5 +91,6 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({
     balloons: results,
     nextCursor,
+    totalCount,
   });
 }

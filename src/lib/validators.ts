@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const createBalloonSchema = z.object({
   styleId: z.number().int().min(1).max(5),
+  shapeId: z.number().int().min(0).max(12).default(0),
   wishText: z.string().min(1).max(120).trim(),
   category: z.string().optional(),
   displayName: z.string().max(30).trim().optional(),

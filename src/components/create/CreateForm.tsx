@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import ColorPicker from "@/components/balloon/ColorPicker";
+import ShapePicker from "@/components/balloon/ShapePicker";
 import CategoryPicker from "@/components/balloon/CategoryPicker";
-import ReleaseAnimation from "@/components/balloon/ReleaseAnimation";
 import Confirmation from "@/components/share/Confirmation";
 
 const EXAMPLE_WISHES = [
@@ -15,15 +15,26 @@ const EXAMPLE_WISHES = [
   "Wishing for a year full of laughter and adventure.",
 ];
 
-type FormState = "form" | "releasing" | "done";
+type Phase = "form" | "releasing" | "done";
 
-export default function CreateForm() {
-  const [state, setState] = useState<FormState>("form");
+interface CreateFormProps {
+  phase: Phase;
+  balloonId: string | null;
+  onRelease: (balloon: { id: string; styleId: number; shapeId: number }) => void;
+  onReset: () => void;
+}
+
+export default function CreateForm({
+  phase,
+  balloonId,
+  onRelease,
+  onReset,
+}: CreateFormProps) {
   const [wishText, setWishText] = useState("");
   const [category, setCategory] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState("");
   const [styleId, setStyleId] = useState<number | null>(1);
-  const [balloonId, setBalloonId] = useState<string | null>(null);
+  const [shapeId, setShapeId] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -48,6 +59,7 @@ export default function CreateForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           styleId,
+          shapeId,
           wishText: wishText.trim(),
           category: category || undefined,
           displayName: displayName.trim() || undefined,
@@ -63,8 +75,7 @@ export default function CreateForm() {
       }
 
       const balloon = await res.json();
-      setBalloonId(balloon.id);
-      setState("releasing");
+      onRelease({ id: balloon.id, styleId, shapeId });
     } catch {
       setError("Network error. Please check your connection and try again.");
     } finally {
@@ -72,17 +83,28 @@ export default function CreateForm() {
     }
   }
 
-  if (state === "releasing" && styleId) {
+  function handleReleaseAnother() {
+    setWishText("");
+    setCategory(null);
+    setDisplayName("");
+    setStyleId(1);
+    setShapeId(0);
+    setError(null);
+    onReset();
+  }
+
+  if (phase === "releasing") {
     return (
-      <ReleaseAnimation
-        styleId={styleId}
-        onComplete={() => setState("done")}
-      />
+      <div className="bg-white rounded-2xl shadow-sm p-6 text-center animate-fade-in">
+        <p className="text-text-secondary text-lg py-8">
+          Your balloon is rising into the sky...
+        </p>
+      </div>
     );
   }
 
-  if (state === "done" && balloonId) {
-    return <Confirmation balloonId={balloonId} />;
+  if (phase === "done" && balloonId) {
+    return <Confirmation balloonId={balloonId} onReleaseAnother={handleReleaseAnother} />;
   }
 
   return (
@@ -151,6 +173,12 @@ export default function CreateForm() {
       <ColorPicker
         selectedId={styleId}
         onSelect={(id) => setStyleId(id)}
+      />
+
+      {/* Shape picker */}
+      <ShapePicker
+        selectedId={shapeId}
+        onSelect={(id) => setShapeId(id)}
       />
 
       {/* Error */}

@@ -40,11 +40,11 @@ export default function BalloonDetail({ balloon }: BalloonDetailProps) {
   return (
     <div className="animate-fade-in text-center space-y-6 max-w-md mx-auto px-4 py-12">
       <div className="flex justify-center animate-float">
-        <BalloonSVG styleId={balloon.styleId} size={160} />
+        <BalloonSVG styleId={balloon.styleId} shapeId={balloon.shapeId ?? 0} size={160} />
       </div>
 
       <div className="bg-white shadow-sm rounded-2xl p-6 space-y-3">
-        <p className="text-xl text-text-primary leading-relaxed">
+        <p className="text-xl text-text-primary leading-relaxed font-display">
           &ldquo;{balloon.wishText}&rdquo;
         </p>
 
