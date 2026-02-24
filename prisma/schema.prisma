@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Balloon {
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now()) @map("created_at")
+  styleId      Int      @map("style_id")
+  wishText     String   @map("wish_text")
+  category     String?
+  displayName  String?  @map("display_name")
+  privacy      String   @default("public") // "public" | "blurred_until_tap"
+  reportCount  Int      @default(0) @map("report_count")
+  status       String   @default("active") // "active" | "hidden"
+
+  @@map("balloons")
+}
