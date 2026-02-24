@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import SkyBackground from "@/components/sky/SkyBackground";
 import SkyFeed from "@/components/sky/SkyFeed";
@@ -26,7 +27,15 @@ export default function SkyPage() {
           <SkyFeed />
         </div>
 
-        <div className="text-center pb-12">
+        <div className="flex flex-col items-center pb-12">
+          <Image
+            src="/balloon-girl.png"
+            alt="Girl holding balloons"
+            width={280}
+            height={400}
+            className="mb-8 mix-blend-multiply"
+            priority={false}
+          />
           <Link
             href="/"
             className="inline-block px-8 py-3 bg-accent hover:bg-accent-hover text-white font-semibold rounded-full shadow-lg transition-all duration-200 text-base hover:scale-105"
