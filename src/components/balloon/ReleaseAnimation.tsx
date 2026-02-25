@@ -25,7 +25,7 @@ export default function ReleaseAnimation({
   onComplete,
 }: ReleaseAnimationProps) {
   useEffect(() => {
-    const timer = setTimeout(onComplete, 3500);
+    const timer = setTimeout(onComplete, 5500);
     return () => clearTimeout(timer);
   }, [onComplete]);
 

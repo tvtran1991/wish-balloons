@@ -88,7 +88,7 @@ export default function SkyFeed({ newBalloonId }: SkyFeedProps = {}) {
           {totalCount} {totalCount === 1 ? "wish" : "wishes"} released to the sky today
         </p>
       )}
-      <div className="flex flex-wrap justify-center gap-6 sm:gap-8 px-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 sm:gap-8 px-4 justify-items-center">
         {balloons.map((balloon, i) => (
           <BalloonCard
             key={balloon.id}

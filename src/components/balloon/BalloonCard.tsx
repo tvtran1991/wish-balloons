@@ -28,7 +28,7 @@ export default function BalloonCard({
   return (
     <Link
       href={`/b/${balloon.id}`}
-      className="group flex flex-col items-center text-center max-w-[160px] transition-transform duration-300 hover:scale-105"
+      className="group flex flex-col items-center text-center max-w-[200px] transition-transform duration-300 hover:scale-105"
       style={{
         animation: `float ${animationDuration}s ease-in-out infinite`,
         animationDelay: `${animationDelay}s`,
@@ -38,7 +38,7 @@ export default function BalloonCard({
       <BalloonSVG styleId={balloon.styleId} shapeId={balloon.shapeId ?? 0} size={80} />
 
       <div
-        className={`mt-1 px-3 py-2 bg-white border border-gray-200 rounded-xl max-w-[150px] transition-all duration-200 ${
+        className={`mt-1 px-3 py-2 bg-white border border-gray-200 rounded-xl max-w-[190px] transition-all duration-200 ${
           isBlurred ? "cursor-pointer" : ""
         }`}
         style={{ transform: `rotate(${rotation}deg)` }}
@@ -52,7 +52,7 @@ export default function BalloonCard({
         }
       >
         <p
-          className={`text-[13px] text-gray-800 leading-snug line-clamp-3 font-display ${
+          className={`text-[13px] text-gray-800 leading-snug font-display ${
             isBlurred ? "blur-sm select-none" : ""
           }`}
         >

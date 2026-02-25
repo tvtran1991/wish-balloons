@@ -52,20 +52,20 @@ export default function HomePage() {
       <div
         className={`${
           phase === "releasing"
-            ? "fixed inset-0 z-50"
+            ? "fixed inset-0 z-50 lg:static lg:z-auto lg:flex-1"
             : "hidden lg:block flex-1"
         } relative overflow-hidden`}
       >
         <SkyBackground />
 
-        {/* Live balloon feed */}
+        {/* Live balloon feed — always visible */}
         <div className="relative z-10 pt-8 overflow-y-auto h-full">
-          <SkyFeed newBalloonId={releasedBalloon?.id ?? null} />
+          <SkyFeed newBalloonId={phase === "done" ? releasedBalloon?.id ?? null : null} />
         </div>
 
         {/* Release animation overlay */}
         {phase === "releasing" && releasedBalloon && (
-          <div className="absolute inset-0 z-20">
+          <div className="absolute inset-x-0 bottom-0 z-20 h-full pointer-events-none">
             <ReleaseAnimation
               styleId={releasedBalloon.styleId}
               onComplete={() => setPhase("done")}

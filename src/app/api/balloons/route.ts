@@ -72,7 +72,7 @@ export async function GET(request: NextRequest) {
   const [balloons, totalCount] = await Promise.all([
     prisma.balloon.findMany({
       where: { status: "active" },
-      orderBy: { createdAt: "desc" },
+      orderBy: { createdAt: "asc" },
       take: limit + 1,
       ...(cursor
         ? {
